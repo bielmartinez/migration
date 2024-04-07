@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    //
+    public function index(){
+        $articles = articles::all()->paginate(2);
+        return view('welcome');
+    }
 }
