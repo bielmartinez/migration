@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Article; 
 
 class ArticleController extends Controller
 {
     public function index(){
-        $articles = articles::all()->paginate(2);
+        $articles = Article::all();
         return view('welcome');
     }
 }
