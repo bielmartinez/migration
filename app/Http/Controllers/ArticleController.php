@@ -7,9 +7,14 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index(){
-        $articles = Article::latest()->paginate(10);
-        return view('dashboard',compact('articles'));
+    public function index(Request $request)
+    {
+        $items = $request->items ?? 10;      // get the pagination number or a default
+    
+        $articles= Article::latest()->paginate($items);
+        $articles->appends(['items' => $items]); 
+    
+        return view('dashboard', compact('articles', 'items'));
     }
 
     public function welcome(){

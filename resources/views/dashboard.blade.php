@@ -18,6 +18,20 @@
         <li>No hi ha més articles.</li>
         @endforelse
     </ul>
+    
+
+ <form>
+         <select id="pagination">
+             <option value="5" @if($items == 5) selected @endif >5</option>
+             <option value="10" @if($items == 10) selected @endif >10</option>
+             <option value="20" @if($items == 20) selected @endif >20</option>
+         </select> </form>
+     
+     <script>
+         document.getElementById('pagination').onchange = function() { 
+             window.location = "{!! $articles->url(1) !!}&items=" + this.value; 
+         };  </script>
+    
     <div class="mt-8">
         {{ $articles->links() }}
     </div>
