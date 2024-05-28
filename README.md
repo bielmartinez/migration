@@ -1,2 +1,4 @@
 # Pràctica 7 - Migració PHP natiu a Laravel
-No es poden triar el nombre d'articles per pàgina, tot i així es tracten diferent la paginació en cas d'estar logat i en cas de no estar-ho i es pot modificar per codi.
+IMPORTANT
+Per correcte funcionament del projecte es requereix que en l'arxiu de hosts aparegui el següent host:
+127.0.0.1      recu.com
