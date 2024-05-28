@@ -37,4 +37,9 @@ return [
         'redirect' => 'http://recu.com:8000/google-auth/callback',
     ],
 
+    'recaptcha' => [
+        'key' => env('GOOGLE_RECAPTCHA_KEY'),
+        'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+        ],
+
 ];

@@ -39,9 +39,15 @@
                 </a>
             @endif
 
+            @if(config('services.recaptcha.key'))
+                <div class="g-recaptcha"
+                    data-sitekey="{{config('services.recaptcha.key')}}">
+                </div>
+            @endif
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
     </form>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </x-guest-layout>
