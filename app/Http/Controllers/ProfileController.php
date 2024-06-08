@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -26,13 +27,28 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('foto')) {
+            $request->validate([
+                'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if ($user->foto) {
+                Storage::delete('public/fotos/' . $user->foto);
+            }
+
+            $file = $request->file('foto');
+            $path = $file->store('public/fotos');
+            $user->foto = basename($path);
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
